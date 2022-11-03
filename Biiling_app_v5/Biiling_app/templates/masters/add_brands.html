@@ -1,0 +1,101 @@
+{% include "header/header.html" %}
+<body class="sb-nav-fixed">
+    {% include "header/top_bar.html" %}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            {% include "header/sidebar.html" %}
+        </div>
+        <div id="layoutSidenav_content">
+            <main>  
+                <div class="container-fluid px-4">
+                    <h2 class="mt-4">Master</h2>
+                    <ol class="breadcrumb mb-4 px-4 py-2">
+                        <li class="breadcrumb-item">Master</li>
+                        <li class="breadcrumb-item active">Brands</li>
+                    </ol>
+
+                    <div class="card mb-4 shadow-lg">
+                        <div class="card-header d-flex justify-content-between">
+                            <span><i class="fas fa-pager"></i> Brand</span>
+                        </div>
+                        <div class="card-body">
+                            <form id='Formbrand'>
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="product" class='float-left'>Product <span class='text-danger'>*</span></label>
+                                        <select class="form-select required" id="product" name = "product" aria-label="Default select" data-required='product Name'>
+                                            {{ product_ddl | safe }}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="brand_name" class='float-left'>Brand Name <span class='text-danger'>*</span></label>
+                                        <input type="text" class="form-control required" id="brand_name" name = "brand_name" placeholder="Brand Name" data-required='Brand Name'>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="price" class='float-left'>Price <span class='text-danger'>*</span></label>
+                                        <input type="text" class="form-control required onlydigits" id="price" name = "price" placeholder="Price" data-required='Price'>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer border-top-0 d-flex justify-content-center bg-light">
+                                    <button type="button" class="btn btn-success" id= 'submitbutton' onclick='Insertbrand()' style="width:200px;">Submit</button>
+                                </div>
+                                
+                            </form>
+                        </div> 
+                    </div>
+
+                </div>
+            </main>
+            
+        </div>
+    </div>
+    
+</body>
+
+{% include "header/footer.html" %}  
+<script>
+    
+    function Insertbrand() {
+      if (!validate("Formbrand")) {
+    
+      } else {
+          var myFormData = new FormData($("#Formbrand")[0]);
+          $.ajax({
+              url: 'add_brands',
+              type: "post",
+              data: myFormData,
+              contentType: false,
+              processData: false,
+              beforeSend: function() {},
+              success: function(data) {
+                  if (data == '1') {
+                    Swal.fire({
+                      title: 'Success',
+                      text: "Brand has been inserted succesfully",
+                      icon: 'success',
+                      toast: true,
+                      position: 'top-right'
+                  });
+                    $(".swal2-confirm").click(function(){
+                      window.location.href = "brands";
+                  });
+                  } else {
+                      Swal.fire({
+                          title: 'Error!',
+                          text: data,
+                          icon: 'error',
+                          toast: true,
+                          position: 'top-right'
+                      });
+    
+                  }
+              },
+              error: function() {}
+          });
+      }
+    }
+    </script>

@@ -1,0 +1,58 @@
+.border-left-primary {
+    border-left: 0.25rem solid #4e73df!important;
+}
+
+.border-left-success {
+    border-left: 0.25rem solid #1cc88a!important;
+}
+
+.border-left-info {
+    border-left: 0.25rem solid #36b9cc!important;
+}
+
+.border-left-warning {
+    border-left: 0.25rem solid #f6c23e!important;
+}
+
+.sidebar-heading, .text-uppercase {
+    text-transform: uppercase!important;
+}
+
+.text-gray-800 {
+    color: #5a5c69!important;
+}
+
+.font-weight-bold {
+    font-weight: 700!important;
+}
+
+.text-gray-300 {
+    color: #dddfeb!important;
+}
+
+
+.login,.background{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+}
+
+.container{
+    height: 100%;
+}
+
+#sidenavAccordion{
+    color:#fff !important; 
+    background-color: #1a237e !important;
+}
+
+#sidenavAccordion .nav-link{
+    color: #fff;
+}
+
+.card-header{
+    background-color: #3f51b5 !important;
+    color: #fff !important;
+}

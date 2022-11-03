@@ -1,0 +1,386 @@
+{% include "header/header.html" %}
+<body class="sb-nav-fixed">
+    {% include "header/top_bar.html" %}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            {% include "header/sidebar.html" %}
+        </div>
+        <div id="layoutSidenav_content" style="background-color: #fff">
+            <main>  
+                <div class="container-fluid px-4">
+                    <h2 class="mt-4">Dashboard</h2>
+                    <ol class="breadcrumb mb-4 px-4 py-2">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                    <div class="row">
+                        
+                        <!-- Sales (Annual) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Sales (Annual)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">₹215,000</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <h2 class="text-gray-300 font-weight-bold">₹</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Today sale Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Sales (Today)
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">₹1000</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <h2 class="text-gray-300 font-weight-bold">₹</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Remaining stock</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">₹40,000</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <h2 class="text-gray-300 font-weight-bold">₹</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold text-primary text-uppercase mb-1">
+                                                Number of outlets</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">50</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fa-solid fa-2x fa-shop text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+
+                    <div class="row">
+                        
+                        <div class="col-xl-6">
+                            <div class="card mb-4 shadow-lg" style="background-color: transparent">
+                                <div class="card-header">
+                                    <i class="fa-solid fa-chart-pie"></i>
+                                    Daily Sales Chart
+                                </div>
+                                <div class="card-body">
+                                    <div id="dailyChart"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-6">
+                            <div class="card mb-4 shadow-lg" style="background-color: transparent">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    Weekly Sales Chart
+                                </div>
+                                <div class="card-body">
+                                    <div id="weeklyChart"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card mb-4 shadow-lg">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Sales Data
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Brand Name</th>
+                                        <th>Price</th>
+                                        <th>Created Datetime</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <tr>
+                                        <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>61</td>
+                                        <td>2011/04/25</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Garrett Winters</td>
+                                        <td>Accountant</td>
+                                        <td>63</td>
+                                        <td>2011/07/25</td>   
+                                    </tr>
+                                    <tr>
+                                        <td>Ashton Cox</td>
+                                        <td>Junior Technical Author</td>
+                                        <td>66</td>
+                                        <td>2009/01/12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cedric Kelly</td>
+                                        <td>Senior Javascript Developer</td>
+                                        <td>22</td>
+                                        <td>2012/03/29</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Airi Satou</td>
+                                        <td>Accountant</td>
+                                        <td>33</td>
+                                        <td>2008/11/28</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Brielle Williamson</td>
+                                        <td>Integration Specialist</td>
+                                        <td>61</td>
+                                        <td>2012/12/02</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Herrod Chandler</td>
+                                        <td>Sales Assistant</td>
+                                        <td>59</td>
+                                        <td>2012/08/06</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rhona Davidson</td>
+                                        <td>Integration Specialist</td>
+                                        <td>55</td>
+                                        <td>2010/10/14</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Colleen Hurst</td>
+                                        <td>Javascript Developer</td>
+                                        <td>39</td>
+                                        <td>2009/09/15</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sonya Frost</td>
+                                        <td>Software Engineer</td>
+                                        <td>23</td>
+                                        <td>2008/12/13</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jena Gaines</td>
+                                        <td>Office Manager</td>
+                                        <td>30</td>
+                                        <td>2008/12/19</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quinn Flynn</td>
+                                        <td>Support Lead</td>
+                                        <td>22</td>
+                                        <td>2013/03/03</td>
+                                    </tr>
+                                   
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+    
+</body>
+
+{% include "header/footer.html" %}  
+<script>
+    $(document).ready(function() {
+        $('#datatablesSimple').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+              {
+                extend: 'csvHtml5',
+                title: 'Sales_data.csv',
+                text: 'Expot to CSV',
+                titleAttr: 'CSV',
+                exportOptions: {
+                    columns: ':not(:last-child)',
+                }
+              }
+            ]
+        } );
+    } );
+</script>
+
+
+<script>
+    var options = {
+        series: [{
+        name: 'Sales',
+        data: [44, 55, 41, 67, 22, 43, 21]
+      }],
+        
+      chart: {
+        height: 350,
+        type: 'bar',
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 10,
+          columnWidth: '50%',
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: 2
+      },
+      
+      grid: {
+        row: {
+          colors: ['#fff', '#f2f2f2']
+        }
+      },
+      xaxis: {
+        labels: {
+          rotate: -45
+        },
+        categories: ['26 oct', '27 oct', '28 oct', '29 oct', '30 oct', '31 oct', '01 nov'],
+        tickPlacement: 'on'
+      },
+      yaxis: {
+        title: {
+          text: 'Sales',
+        },
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'light',
+          type: "horizontal",
+          shadeIntensity: 0.25,
+          gradientToColors: undefined,
+          inverseColors: true,
+          opacityFrom: 0.85,
+          opacityTo: 0.85,
+          stops: [50, 0, 100]
+        },
+      }
+      };
+      
+      var chart = new ApexCharts(document.querySelector("#weeklyChart"), options);
+      chart.render();
+      
+</script>
+
+<script>
+    var options = {
+        series: [{
+          name: "Wine",
+          data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+        },
+        {
+          name: "liqueur",
+          data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+        },
+        {
+          name: 'Beer',
+          data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+        }
+      ],
+        chart: {
+        height: 350,
+        type: 'line',
+        zoom: {
+          enabled: false
+        },
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: [5, 7, 5],
+        curve: 'straight',
+        dashArray: [0, 8, 5]
+      },
+      title: {
+        text: 'Page Statistics',
+        align: 'left'
+      },
+      legend: {
+        tooltipHoverFormatter: function(val, opts) {
+          return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+        }
+      },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6
+        }
+      },
+      xaxis: {
+        categories: ['10:00', '11:00', '12:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00',
+          '7:00', '8:00', '9:00'
+        ],
+      },
+      tooltip: {
+        y: [
+          {
+            title: {
+              formatter: function (val) {
+                return val + " (mins)"
+              }
+            }
+          },
+          {
+            title: {
+              formatter: function (val) {
+                return val + " per session"
+              }
+            }
+          },
+          {
+            title: {
+              formatter: function (val) {
+                return val;
+              }
+            }
+          }
+        ]
+      },
+      grid: {
+        borderColor: '#f1f1f1',
+      }
+      };
+
+    var chart = new ApexCharts(document.querySelector("#dailyChart"), options);
+    chart.render();
+</script>

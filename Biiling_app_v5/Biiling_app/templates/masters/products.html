@@ -1,0 +1,138 @@
+{% include "header/header.html" %}
+<body class="sb-nav-fixed">
+    {% include "header/top_bar.html" %}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            {% include "header/sidebar.html" %}
+        </div>
+        <div id="layoutSidenav_content">
+            <main>  
+                <div class="container-fluid px-4">
+                    <h2 class="mt-4">Master</h2>
+                    <ol class="breadcrumb mb-4 px-4 py-2">
+                        <li class="breadcrumb-item">Master</li>
+                        <li class="breadcrumb-item active">Products</li>
+                    </ol>
+
+                    <div class="card mb-4 shadow-lg">
+                        <div class="card-header d-flex justify-content-between">
+                            <span><i class="fas fa-table me-1"></i>Products</span>
+                            <a href="add_products_page"><button class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Add</button></a>
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Created Datetime</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    {% for productData in product_type %}
+                                        <tr>
+                                            <td>{{productData.product_type_name}}</td>
+                                            <td>{{productData.created_at}}</td>
+                                            <td class="text-center"><button type="button" class="btn btn-sm btn-info"><i class="fa-solid fa-pencil"></i> Edit</button></td>
+                                        </tr>
+                                    {% endfor %}
+                                   
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>
+
+                    <center>
+                     
+                        <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header bg-info">
+                                <h5 class="modal-title text-light">Add new product</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              
+                                <form id='FormProducts'>
+                                    {% csrf_token %}
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="product_name" class='float-left'>Product Name</label>
+                                            <input type="text" class="form-control" id="product_name" name = "product_name" placeholder="Product Name">
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer border-top-0 d-flex justify-content-right bg-light">
+                                        <button type="button" class="btn btn-success" id= 'submitbutton' onclick='InsertProducts()'>Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+                    </center>
+
+                </div>
+            </main>
+            
+        </div>
+    </div>
+    
+</body>
+
+{% include "header/footer.html" %}  
+<script>
+    $(document).ready(function() {
+        $('#datatablesSimple').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+              {
+                extend: 'csvHtml5',
+                title: 'Products_data.csv',
+                text: 'Expot to CSV',
+                titleAttr: 'CSV',
+                exportOptions: {
+                    columns: ':not(:last-child)',
+                }
+              }
+            ]
+        } );
+    } );
+    
+    function InsertProducts() {
+      if (!validate("FormProducts")) {
+    
+      } else {
+          var myFormData = new FormData($("#FormProducts")[0]);
+          $.ajax({
+              url: 'add_products',
+              type: "post",
+              data: myFormData,
+              contentType: false,
+              processData: false,
+              beforeSend: function() {},
+              success: function(data) {
+                  if (data == '1') {
+                    Swal.fire({
+                      title: 'Success',
+                      text: "Product has been inserted succesfully",
+                      icon: 'success',
+                  });
+                    $(".swal2-confirm").click(function(){
+                      window.location.href = "products";
+                  });
+                  } else {
+                      Swal.fire({
+                          title: 'Error!',
+                          text: data,
+                          icon: 'error',
+                      });
+    
+                  }
+              },
+              error: function() {}
+          });
+      }
+    }
+    </script>

@@ -1,0 +1,67 @@
+{% include 'header/header.html' %}
+<body class="sb-nav-fixed">
+    {% include 'header/top_bar.html' %}
+
+        <div id="layoutSidenav_content" class="pt-5">
+        <main>
+            <div class="container px-4">
+                <h3 class="mt-4">Shop</h3>
+                <ol class="breadcrumb mb-4 px-4 py-2">
+                    <li class="breadcrumb-item active">Shop</li>
+                    <li class="breadcrumb-item active">Add Stock</li>
+                </ol>
+
+                <div class="card mb-4 shadow-lg">
+                    <div class="card-header d-flex justify-content-between">
+                        <span><i class="fas fa-pager"></i> Add Stock</span>
+                    </div>
+                    <div class="card-body">
+                        <form id='Formbrand'>
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="shop" class='float-left'>Shop Name</label>
+                                    <select class="form-select" id="shop" name = "shop" aria-label="Default select">
+                                        {{ product_ddl | safe }}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="product" class='float-left'>Product Name</label>
+                                    <select class="form-select" id="product" name = "product" aria-label="Default select">
+                                        {{ product_ddl | safe }}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="brand" class='float-left'>Brand Name</label>
+                                    <select class="form-select" id="brand" name = "brand" aria-label="Default select">
+                                        {{ product_ddl | safe }}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="stock_recieved_date" class='float-left'>Stock received date</label>
+                                    <input type="date" class="form-control" id="stock_recieved_date" name = "stock_recieved_date" placeholder="Stock received date">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="quantity" class='float-left'>Quantity</label>
+                                    <input type="text" class="form-control onlydigits" id="quantity" name = "quantity" placeholder="Quantity">
+                                </div>
+
+                            </div>
+                            <div class="modal-footer border-top-0 d-flex justify-content-center bg-light">
+                                <button type="button" class="btn btn-success" id= 'submitbutton' style="width:200px;">Submit</button>
+                            </div>
+                            
+                        </form>
+                    </div> 
+                </div>
+
+            </div>
+        </main>
+        </div>
+</body>
+
+{% include 'header/footer.html' %}

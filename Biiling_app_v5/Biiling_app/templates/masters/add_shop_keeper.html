@@ -1,0 +1,113 @@
+{% include "header/header.html" %}
+<body class="sb-nav-fixed">
+    {% include "header/top_bar.html" %}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            {% include "header/sidebar.html" %}
+        </div>
+        <div id="layoutSidenav_content">
+            <main>  
+                <div class="container-fluid px-4">
+                    <h2 class="mt-4">Master</h2>
+                    <ol class="breadcrumb mb-4 px-4 py-2">
+                        <li class="breadcrumb-item">Master</li>
+                        <li class="breadcrumb-item active">Shop Keeper</li>
+                    </ol>
+
+                    <div class="card mb-4 shadow-lg">
+                        <div class="card-header d-flex justify-content-between">
+                            <span><i class="fas fa-pager"></i> Shop Keeper</span>
+                        </div>
+                        <div class="card-body">
+                            <form id='FormShopKeeper'>
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="shop_id" class='float-left'>Shop ID <span class='text-danger'>*</span></label>
+                                        <select class="form-select required" id="shop_id" name = "shop_id" aria-label="Default select" data-required ='Shop id'>
+                                            {{ shop_id_ddl | safe }}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="txtUsername" class='float-left'>Username <span class='text-danger'>*</span></label>
+                                        <input type="text" class="form-control required" id="txtUsername" name = 'txtUsername' placeholder="Enter Username" data-required='Username'>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <label for="txtFullname" class='float-left'>Fullname <span class='text-danger'>*</span></label>
+                                        <input type="text" class="form-control required onlyalpha" id="txtFullname" name = 'txtFullname' placeholder="Enter Fullname" data-required='Fullname'>
+                                      </div>
+
+                                      <div class="form-group">
+                                        <label for="txtEmail" class='float-left'>Email address <span class='text-danger'>*</span></label>
+                                        <input type="text" class="form-control required vld_email" id="txtEmail" name = 'txtEmail' placeholder="Enter Email" data-required='Email'>
+                                      </div>
+
+                                      <div class="form-group">
+                                        <label for="txtMobile" class='float-left'>Mobile Number <span class='text-danger'>*</span></label>
+                                        <input type="text" class="form-control required vld_phoneno" id="txtMobile" name = 'txtMobile' placeholder="Enter Mobile" data-required='Mobile'>
+                                      </div>
+                                      
+
+                                </div>
+                                <div class="modal-footer border-top-0 d-flex justify-content-center bg-light">
+                                    <button type="button" class="btn btn-success" id= 'submitbutton' onclick= 'InsertShopKeeper()' style="width:200px;">Submit</button>
+                                </div>
+                               
+                            </form>
+                        </div> 
+                    </div>
+
+                </div>
+
+            </main>
+            
+        </div>
+    </div>
+    
+</body>
+
+{% include "header/footer.html" %}  
+<script>
+    
+    function InsertShopKeeper() {
+      if (!validate("FormShopKeeper")) {
+    
+      } else {
+          var myFormData = new FormData($("#FormShopKeeper")[0]);
+          $.ajax({
+              url: 'add_shop_keeper',
+              type: "post",
+              data: myFormData,
+              contentType: false,
+              processData: false,
+              beforeSend: function() {},
+              success: function(data) {
+                  if (data == '1') {
+                    Swal.fire({
+                      title: 'Success',
+                      text: "Shop keeper has been inserted succesfully",
+                      icon: 'success',
+                      toast: true,
+                      position: 'top-right'
+                  });
+                    $(".swal2-confirm").click(function(){
+                      window.location.href = "shop_keeper";
+                  });
+                  } else {
+                      Swal.fire({
+                          title: 'Error!',
+                          text: data,
+                          icon: 'error',
+                          toast: true,
+                          position: 'top-right'
+                      });
+    
+                  }
+              },
+              error: function() {}
+          });
+      }
+    }
+    </script>

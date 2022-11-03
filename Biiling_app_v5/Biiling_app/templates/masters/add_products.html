@@ -1,0 +1,89 @@
+{% include "header/header.html" %}
+<body class="sb-nav-fixed">
+    {% include "header/top_bar.html" %}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            {% include "header/sidebar.html" %}
+        </div>
+        <div id="layoutSidenav_content">
+            <main>  
+                <div class="container-fluid px-4">
+                    <h2 class="mt-4">Master</h2>
+                    <ol class="breadcrumb mb-4 px-4 py-2">
+                        <li class="breadcrumb-item">Master</li>
+                        <li class="breadcrumb-item active">Products</li>
+                    </ol>
+
+                    <div class="card mb-4 shadow-lg">
+                        <div class="card-header d-flex justify-content-between">
+                            <span><i class="fas fa-pager"></i> Products</span>
+                        </div>
+                        <div class="card-body">
+                            <form id='FormProducts'>
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="product_name" class='float-left'>Product Name <span class='text-danger'>*</span></label>
+                                        <input type="text" class="form-control required" id="product_name" name = "product_name" placeholder="Product Name" data-required='Product Name'>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer border-top-0 d-flex justify-content-center bg-light">
+                                    <button type="button" class="btn btn-success" id= 'submitbutton' onclick='InsertProducts()' style="width:200px;">Submit</button>
+                                </div>
+                               
+                            </form>
+                        </div> 
+                    </div>
+
+                </div>
+            </main>
+            
+        </div>
+    </div>
+    
+</body>
+
+{% include "header/footer.html" %}  
+<script>
+   
+    function InsertProducts() {
+      if (!validate("FormProducts")) {
+    
+      } else {
+          var myFormData = new FormData($("#FormProducts")[0]);
+          $.ajax({
+              url: 'add_products',
+              type: "post",
+              data: myFormData,
+              contentType: false,
+              processData: false,
+              beforeSend: function() {},
+              success: function(data) {
+                  if (data == '1') {
+                    Swal.fire({
+                      title: 'Success',
+                      text: "Product has been inserted succesfully",
+                      icon: 'success',
+                      toast: true,
+                      position: 'top-right'
+                  });
+                    $(".swal2-confirm").click(function(){
+                      window.location.href = "products";
+                  });
+                  } else {
+                      Swal.fire({
+                          title: 'Error!',
+                          text: data,
+                          icon: 'error',
+                          toast: true,
+                          position: 'top-right'
+                      });
+    
+                  }
+              },
+              error: function() {}
+          });
+      }
+    }
+    </script>
